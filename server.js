@@ -16,7 +16,7 @@ mongoose.connect(
 .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
-  res.send("StudyHub AI Backend is running");
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/register", async (req, res) => {
@@ -41,9 +41,6 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    console.log("LOGIN ROUTE HIT");
-    console.log(req.body);
-
     const { email, password } = req.body;
 
     const user = await User.findOne({ email: email });
@@ -75,6 +72,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

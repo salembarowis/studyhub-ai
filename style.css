@@ -204,4 +204,100 @@ footer{
     background:#111;
     color:white;
     cursor:pointer;
+}.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.dashboard-page {
+  padding: 50px;
+  background: #f4f6fb;
+  min-height: 100vh;
+}
+
+.dashboard-page h2 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.stat-card,
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  border: 1px solid #e5e5e5;
+}
+
+.stat-card p {
+  font-size: 34px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.stat-card span {
+  color: #777;
+}
+
+.dashboard-sections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.panel-header button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: white;
+  cursor: pointer;
+}
+
+.item {
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.dark .dashboard-page {
+  background: #111827;
+  color: white;
+}
+
+.dark .stat-card,
+.dark .panel {
+  background: #1f2937;
+  color: white;
+  border-color: #374151;
+}
+
+.dark .item {
+  background: #111827;
+  border-color: #374151;
+}
+
+.dark .subtitle {
+  color: #aaa;
 }

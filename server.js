@@ -8,56 +8,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
-// MongoDB Connection
+
 mongoose.connect(
   "mongodb+srv://salem:StudyHub123@cluster0.byzfmpa.mongodb.net/studyhub?retryWrites=true&w=majority&appName=Cluster0"
 )
-.then(() => {
-  console.log("MongoDB Connected");
-})
-.catch((err) => {
-  console.log(err);
-});
+.then(() => console.log("MongoDB Connected"))
+.catch((err) => console.log(err));
 
-// Home Route
 app.get("/", (req, res) => {
   res.send("StudyHub AI Backend is running");
 });
 
-// Test Route
-app.get("/test", (req, res) => {
-  res.json({
-    message: "Test route working"
-  });
-});
-
-// Register Route
 app.post("/register", async (req, res) => {
   try {
-    console.log("REGISTER ROUTE HIT");
-
     const { name, email, password } = req.body;
 
-    const newUser = new User({
-      name,
-      email,
-      password
-    });
-
+    const newUser = new User({ name, email, password });
     await newUser.save();
 
-    res.status(201).json({
+    res.json({
       success: true,
-      message: "User registered successfully",
-      user: {
-        name,
-        email
-      }
+      message: "User registered successfully"
     });
 
   } catch (error) {
-    console.log(error);
-
     res.status(500).json({
       success: false,
       message: error.message
@@ -65,7 +39,42 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Start Server
+app.post("/login", async (req, res) => {
+  try {
+    console.log("LOGIN ROUTE HIT");
+    console.log(req.body);
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    if (user.password !== password) {
+      return res.json({
+        success: false,
+        message: "Incorrect password"
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Login successful"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });

@@ -23,7 +23,12 @@ app.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    const newUser = new User({ name, email, password });
+    const newUser = new User({
+      name,
+      email,
+      password
+    });
+
     await newUser.save();
 
     res.json({
@@ -32,9 +37,17 @@ app.post("/register", async (req, res) => {
     });
 
   } catch (error) {
+
+    if (error.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        message: "Email already registered"
+      });
+    }
+
     res.status(500).json({
       success: false,
-      message: error.message
+      message: "Server Error"
     });
   }
 });
@@ -43,7 +56,7 @@ app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.json({
@@ -67,7 +80,7 @@ app.post("/login", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message
+      message: "Server Error"
     });
   }
 });

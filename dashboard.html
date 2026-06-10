@@ -26,19 +26,19 @@
     <div class="stats">
       <div class="stat-card">
         <h3>Uploaded Notes</h3>
-        <p id="notesCount">12</p>
+        <p id="notesCount">0</p>
         <span>notes</span>
       </div>
 
       <div class="stat-card">
         <h3>AI Summaries</h3>
-        <p id="summariesCount">8</p>
+        <p id="summariesCount">0</p>
         <span>summaries</span>
       </div>
 
       <div class="stat-card">
         <h3>Upcoming Tasks</h3>
-        <p id="tasksCount">5</p>
+        <p id="tasksCount">0</p>
         <span>tasks</span>
       </div>
     </div>
@@ -49,6 +49,11 @@
         <div class="panel-header">
           <h3>Uploaded Notes</h3>
           <button onclick="addNote()">Add Note</button>
+        </div>
+
+        <div class="upload-box">
+          <input type="file" id="fileUpload">
+          <button onclick="uploadFile()">Upload File</button>
         </div>
 
         <div class="item">Math Lecture 1.pdf</div>
@@ -109,6 +114,26 @@
 
         notesPanel.appendChild(newNote);
         updateCounts();
+      }
+    }
+
+    function uploadFile() {
+      const fileInput = document.getElementById("fileUpload");
+      const file = fileInput.files[0];
+
+      if (file) {
+        const notesPanel = document.querySelector("#notes");
+        const newFile = document.createElement("div");
+
+        newFile.className = "item";
+        newFile.textContent = file.name;
+
+        notesPanel.appendChild(newFile);
+        fileInput.value = "";
+
+        updateCounts();
+      } else {
+        alert("Please choose a file first");
       }
     }
 

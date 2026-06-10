@@ -300,4 +300,31 @@ footer{
 
 .dark .subtitle {
   color: #aaa;
+}.upload-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.upload-box input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.upload-box button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background: #111;
+    color: white;
+    cursor: pointer;
+}
+
+.dark .upload-box input {
+    background: #111827;
+    color: white;
+    border-color: #374151;
 }
